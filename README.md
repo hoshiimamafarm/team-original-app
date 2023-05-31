@@ -1,24 +1,28 @@
-# team-original-app
+# 概要
 
-## Project setup
-```
-npm install
-```
+このアプリケーションは、就活生が就職活動を管理するための Web アプリケーションです。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 機能
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- ログイン/新規登録機能
+- マイページ
+- カレンダーに予定表示
+- todo の投稿
+- todo リスト表示
+- 自己 PR 表示
+- 自己 PR の投稿
 
-### Lints and fixes files
-```
-npm run lint
-```
+<!-- ## 利用方法
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+-  -->
+
+## 開発環境
+
+- 言語：JavaScript
+- フレームワーク：Vue.js
+- データベース：firebase
+
+## 免責事項
+
+このアプリケーションは、就職活動を支援するためのツールです。  
+就職活動の成功を保証するものではありません。
