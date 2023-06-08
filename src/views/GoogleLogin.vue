@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "../firebase";
 
 export default {
   methods: {
