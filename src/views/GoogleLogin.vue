@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div>This is a login page</div>
-    <button @click="on_click">Google login</button>
+    <button @click="onClick">Google login</button>
   </div>
 </template>
 
@@ -10,7 +10,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "../firebase";
 
 export default {
   methods: {
-    async on_click() {
+    async onClick() {
       const provider = await new GoogleAuthProvider();
       const auth = await getAuth();
 
