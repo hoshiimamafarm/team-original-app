@@ -24,8 +24,8 @@ const routes = [
     component: GoogleLogin,
   },
   {
-    path: "/MyPage",
-    name: "MyPage",
+    path: "/mypage",
+    name: "mypage",
     component: MyPage,
   },
 ];

@@ -1,8 +1,8 @@
 <template>
   <div class="myprofile"></div>
   <div class="login">
-    <div v-show="login_fin">This is a login page</div>
-    <button v-show="login_fin" @click="on_click">Google login</button>
+    <div v-show="canLogin">This is a login page</div>
+    <button v-show="canLogin" @click="onClick">Google login</button>
   </div>
 </template>
 
@@ -12,11 +12,11 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from "../firebase";
 export default {
   data() {
     return {
-      login_fin: true,
+      canLogin: true,
     };
   },
   methods: {
-    async on_click() {
+    async onClick() {
       const provider = await new GoogleAuthProvider();
       const auth = await getAuth();
 
@@ -24,7 +24,7 @@ export default {
         .then((result) => {
           const user = result.user;
           console.log(user);
-          this.login_fin = false;
+          this.canLogin = false;
         })
         .catch((error) => {
           console.log(error);
