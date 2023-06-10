@@ -18,8 +18,8 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
-    path: "/Push",
-    name: "Push",
+    path: "/postselfpr",
+    name: "postselfpr",
     component: PushPrView,
   },
 ];
