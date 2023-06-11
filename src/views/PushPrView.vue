@@ -2,10 +2,10 @@
   <h1>自己PR投稿</h1>
   <div>
     <div>
-      <textarea v-model="titleText" placeholder="タイトル"></textarea>
+      <textarea v-model="titleText" placeholder="タイトル" />
     </div>
     <div>
-      <textarea v-model="prText" placeholder="自己PRの内容"></textarea>
+      <textarea v-model="prText" placeholder="自己PRの内容" />
     </div>
     <div v-if="errors">
       <div v-for="error in errors" v-bind:key="error">{{ error }}</div>
@@ -78,10 +78,7 @@ export default {
           title: this.titleText,
           selfPr: this.prText,
         });
-        this.selfPrs.push({
-          title: this.titleText,
-          selfPr: this.prText,
-        });
+        this.fetchSelfprData();
 
         (this.titleText = ""), (this.prText = "");
         this.errors.splice(0);
