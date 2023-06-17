@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   setPersistence,
   browserSessionPersistence,
+  signOut,
 } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,4 +28,5 @@ export {
   GoogleAuthProvider,
   setPersistence,
   browserSessionPersistence,
+  signOut,
 };
