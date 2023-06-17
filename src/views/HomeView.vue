@@ -1,9 +1,17 @@
 <template>
-  <div class="home">
-    <div>This is a home page</div>
-  </div>
+  <HelloWorld />
 </template>
 
 <script>
-export default {};
+import { defineComponent } from "vue";
+
+import HelloWorld from "../components/HelloWorld.vue";
+
+export default defineComponent({
+  name: "HomeView",
+
+  components: {
+    HelloWorld,
+  },
+});
 </script>
