@@ -1,5 +1,5 @@
 <template>
-  <div id="calendarapp">
+  <div>
     <Calendar />
   </div>
   <div>

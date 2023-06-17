@@ -9,5 +9,3 @@ const app = createApp(App);
 app.use(VCalendar, {});
 app.use(router);
 app.mount("#app");
-
-// createApp(App).use(router).use(VCalendar, {}).mount("#app");
