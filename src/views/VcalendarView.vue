@@ -1,9 +1,9 @@
 <template>
-  <div id="app">
+  <div id="calendarapp">
     <Calendar />
   </div>
   <div>
-    <button v-on="createDate">作成</button>
+    <button v-on="moveToCreateTodoPage">作成</button>
   </div>
 </template>
 
@@ -19,7 +19,7 @@ export default {
     return {};
   },
   methods: {
-    createDate() {},
+    moveToCreateTodoPage() {},
   },
 };
 </script>

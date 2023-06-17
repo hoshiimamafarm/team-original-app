@@ -12,9 +12,8 @@ export default {
     };
   },
   methods: {
-    async fetchDate() {
+    async fetchTodoDate() {
       const querySnapshot = await getDocs(collection(db, "todos"));
-      this.todos = [];
       querySnapshot.forEach((doc) => {
         this.todos.push({
           dates: [doc.data().date.toDate()],
@@ -43,7 +42,7 @@ export default {
     },
   },
   created() {
-    this.fetchDate();
+    this.fetchTodoDate();
   },
 };
 </script>
