@@ -32,13 +32,13 @@
 
 <script>
 import {
+  db,
   collection,
   addDoc,
   getDocs,
   deleteDoc,
   doc,
-} from "firebase/firestore";
-import { db } from "../firebase.js";
+} from "../firebase.js";
 
 export default {
   data() {

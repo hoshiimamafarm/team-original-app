@@ -1,18 +1,19 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/postselfpr">postselfpr</router-link> |
-    <router-link to="/login">login</router-link> |
-    <router-link to="/mypage">My Page</router-link>
-  </nav>
+  <HeaderVue />
 
   <router-view />
+  <FooterVue />
 </template>
 
 <script>
+import HeaderVue from "./components/HeaderVue.vue";
+import FooterVue from "./components/FooterVue.vue";
+
 export default {
   name: "App",
-
-  data: () => ({}),
+  components: {
+    HeaderVue,
+    FooterVue,
+  },
 };
 </script>

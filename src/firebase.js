@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
 import {
   getAuth,
   signInWithPopup,
@@ -25,6 +32,13 @@ const db = getFirestore(app);
 export {
   app,
   db,
+  // firestoreからのimport
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  // authからのimport
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
