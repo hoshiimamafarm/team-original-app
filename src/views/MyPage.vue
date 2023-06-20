@@ -5,6 +5,7 @@
     <button v-if="!username" @click="signIn">Googleでログイン</button>
     <button v-else @click="signOut">logout</button>
   </div>
+  <Calendar />
 </template>
 
 <script>
@@ -17,8 +18,12 @@ import {
   setPersistence,
   signOut,
 } from "../firebase";
+import Calendar from "../components/VCalendar.vue";
 
 export default {
+  components: {
+    Calendar,
+  },
   data() {
     return {
       userphoto: "",
