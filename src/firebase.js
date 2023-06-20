@@ -6,6 +6,7 @@ import {
   GoogleAuthProvider,
   setPersistence,
   browserSessionPersistence,
+  onAuthStateChanged,
   signOut,
 } from "firebase/auth";
 
@@ -20,6 +21,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
 export {
   app,
   db,
@@ -28,5 +30,6 @@ export {
   GoogleAuthProvider,
   setPersistence,
   browserSessionPersistence,
+  onAuthStateChanged,
   signOut,
 };

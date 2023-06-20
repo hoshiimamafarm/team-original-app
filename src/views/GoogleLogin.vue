@@ -1,8 +1,8 @@
 <template>
-  <div class="myprofile"></div>
-  <div class="login">
+  <div></div>
+  <div>
     <div v-show="canLogin">This is a login page</div>
-    <button v-show="canLogin" @click="onClick">Google login</button>
+    <button v-show="canLogin" @click="onLogIn">Google login</button>
   </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
     };
   },
   methods: {
-    async onClick() {
+    async onLogIn() {
       const auth = await getAuth();
       setPersistence(auth, browserSessionPersistence)
         .then(() => {

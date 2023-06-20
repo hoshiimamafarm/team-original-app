@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div>
     <div>{{ username }}</div>
     <img v-bind:src="userphoto" />
     <button v-if="!username" @click="signIn">Googleでログイン</button>
@@ -9,16 +9,15 @@
 
 <script>
 import {
-  browserSessionPersistence,
-  onAuthStateChanged,
-  setPersistence,
-} from "firebase/auth";
-import {
   getAuth,
   signInWithPopup,
   GoogleAuthProvider,
+  browserSessionPersistence,
+  onAuthStateChanged,
+  setPersistence,
   signOut,
 } from "../firebase";
+
 export default {
   data() {
     return {
@@ -34,6 +33,7 @@ export default {
         this.username = "";
       });
     },
+
     async signIn() {
       const provider = new GoogleAuthProvider();
       const auth = getAuth();
@@ -48,6 +48,7 @@ export default {
           console.log(error);
         });
     },
+
     onAuthChange() {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
@@ -56,10 +57,15 @@ export default {
       });
     },
   },
+
   created() {
     const auth = getAuth();
-    this.username = auth.currentUser?.displayName;
-    this.onAuthChange();
+    if (!auth.currentUser) {
+      console.log("ログインしてください！");
+    } else {
+      this.username = auth.currentUser?.displayName;
+      this.onAuthChange();
+    }
   },
 };
 </script>
