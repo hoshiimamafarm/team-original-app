@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import TodoList from "../views/todoListApp.vue";
 
 const routes = [
   {
@@ -17,9 +18,9 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
-    path: "/todoList",
-    name: "todoList",
-    component: () => import("../views/todoListApp.vue"),
+    path: "/todolist",
+    name: "todolist",
+    component: TodoList,
   },
 ];
 

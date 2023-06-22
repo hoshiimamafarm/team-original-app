@@ -16,9 +16,9 @@
       <ul>
         <li v-for="(todo, index) in selectedDateTodos" v-bind:key="index">
           <input type="checkbox" v-model="todo.completed" />
-          <label v-bind:class="{ completed: todo.completed }">{{
-            todo.text
-          }}</label>
+          <label v-bind:class="{ completed: todo.completed }"
+            >{{ todo.todo }} {{ formatDate(todo.date) }}</label
+          >
         </li>
       </ul>
     </div>
@@ -29,6 +29,15 @@
 <script>
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
+import {
+  collection,
+  addDoc,
+  deleteDoc,
+  doc,
+  getDocs,
+  onSnapshot,
+} from "firebase/firestore";
+import { db } from "../firebase";
 
 export default {
   components: {
@@ -37,7 +46,7 @@ export default {
   data() {
     return {
       selectedDate: null,
-      todoText: " ",
+      todoText: "",
       todos: [],
     };
   },
@@ -52,41 +61,52 @@ export default {
       }
     },
   },
+  created() {
+    this.fetchTodos();
+  },
+
   methods: {
-    addTodo() {
+    async addTodo() {
       if (this.todoText.trim() !== "") {
-        this.todos.push({
+        await addDoc(collection(db, "todos"), {
           date: this.selectedDate,
-          text: this.todoText,
+          todo: this.todoText,
           completed: false,
         });
+
         this.todoText = "";
       }
-      this.saveTodoToStorage();
     },
     deleteCompletedTodos() {
-      this.todos = this.todos.filter(function (todo) {
-        return !todo.completed;
+      const completedTodos = this.selectedDateTodos.filter(
+        (todo) => todo.completed
+      );
+      completedTodos.forEach((todo) => {
+        deleteDoc(doc(db, "todos", todo.id));
       });
-      this.saveTodoToStorage();
     },
-    saveTodoToStorage: function () {
-      localStorage.setItem("todos", JSON.stringify(this.todos));
-      console.log("saved!");
+    async fetchTodos() {
+      const querySnapshot = await getDocs(collection(db, "todos"));
+      this.todos = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        todo: doc.data().todo,
+        date: doc.data().date.toDate(),
+      }));
+
+      onSnapshot(collection(db, "todos"), (snapshot) => {
+        this.todos = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          todo: doc.data().todo,
+          date: doc.data().date.toDate(),
+        }));
+      });
     },
-    readTodoFromStorage: function () {
-      this.todos = JSON.parse(localStorage.getItem("todos"));
-      if (!this.todos) {
-        this.todos = [];
-      } else {
-        this.todos.forEach((todo) => {
-          todo.date = new Date(todo.date);
-        });
-      }
+    formatDate(date) {
+      let y = date.getFullYear();
+      let m = ("0" + (date.getMonth() + 1)).slice(-2);
+      let d = ("0" + date.getDate()).slice(-2);
+      return y + "-" + m + "-" + d;
     },
-  },
-  mounted: function () {
-    this.readTodoFromStorage();
   },
 };
 </script>
