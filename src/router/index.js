@@ -1,9 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import PushPrView from "../views/PushPrView.vue";
-import GoogleLogin from "../views/GoogleLogin.vue";
 import MyPage from "../views/MyPage.vue";
-import TodoList from "../views/todoListApp.vue";
+import TodoList from "../views/TodoList.vue";
 
 const routes = [
   {
@@ -15,11 +14,6 @@ const routes = [
     path: "/postselfpr",
     name: "PushPrView",
     component: PushPrView,
-  },
-  {
-    path: "/login",
-    name: "login",
-    component: GoogleLogin,
   },
   {
     path: "/mypage",

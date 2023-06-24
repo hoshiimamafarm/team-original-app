@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div>{{ username }}</div>
-    <img v-bind:src="userphoto" />
-    <button v-if="!username" @click="signIn">Googleでログイン</button>
+    <div>{{ userName }}</div>
+    <img v-bind:src="userPhoto" />
+    <button v-if="!userName" @click="signIn">Googleでログイン</button>
     <button v-else @click="signOut">logout</button>
   </div>
-  <Calendar />
+  <Calendar :userId="this.userId" />
 </template>
 
 <script>
@@ -24,18 +24,22 @@ export default {
   components: {
     Calendar,
   },
+
   data() {
     return {
-      userphoto: "",
-      username: "",
+      userPhoto: "",
+      userName: "",
+      userId: "",
     };
   },
+
   methods: {
     async signOut() {
       const auth = getAuth();
       signOut(auth).then(() => {
-        this.userphoto = "";
-        this.username = "";
+        this.userPhoto = "";
+        this.userName = "";
+        this.userId = "";
       });
     },
 
@@ -48,6 +52,7 @@ export default {
           const user = result.user;
           this.userphoto = user.photoURL;
           this.username = user.displayName;
+          this.userId = user.uid;
         })
         .catch((error) => {
           console.log(error);
@@ -57,8 +62,8 @@ export default {
     onAuthChange() {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
-        this.username = user.displayName;
-        this.userphoto = user.photoURL;
+        this.userName = user.displayName;
+        this.userPhoto = user.photoURL;
       });
     },
   },
@@ -68,7 +73,7 @@ export default {
     if (!auth.currentUser) {
       console.log("ログインしてください！");
     } else {
-      this.username = auth.currentUser?.displayName;
+      this.userName = auth.currentUser?.displayName;
       this.onAuthChange();
     }
   },

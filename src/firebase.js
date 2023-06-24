@@ -5,7 +5,10 @@ import {
   addDoc,
   getDocs,
   deleteDoc,
+  onSnapshot,
   doc,
+  query,
+  where,
 } from "firebase/firestore";
 import {
   getAuth,
@@ -38,6 +41,9 @@ export {
   getDocs,
   deleteDoc,
   doc,
+  onSnapshot,
+  query,
+  where,
   // authからのimport
   getAuth,
   signInWithPopup,

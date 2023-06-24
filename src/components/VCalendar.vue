@@ -2,19 +2,25 @@
   <VCalendar :rows="2" title-position="center" :attributes="attrs" expanded />
 </template>
 <script>
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firebase.js";
+import { db, collection, query, where, getDocs } from "../firebase.js";
 
 export default {
+  props: {
+    userId: String,
+  },
+
   data() {
     return {
       todos: [],
     };
   },
+
   methods: {
-    async fetchTodoDate() {
-      const querySnapshot = await getDocs(collection(db, "todos"));
-      querySnapshot.forEach((doc) => {
+    async fetchTodoData() {
+      const todoRef = collection(db, "todos");
+      const queryTodo = query(todoRef, where("userId", "==", this.userId));
+      const querySnapshot = await getDocs(queryTodo);
+      querySnapshot?.forEach((doc) => {
         this.todos.push({
           dates: [doc.data().date.toDate()],
           description: doc.data().todo,
@@ -40,9 +46,30 @@ export default {
         })),
       ];
     },
+
+    getUser() {
+      if (this.userId) {
+        this.fetchTodoData();
+      }
+      return this.userId;
+    },
   },
+
+  watch: {
+    userId: {
+      handler() {
+        if (this.userId) {
+          this.fetchTodoData();
+        }
+      },
+      deep: true,
+    },
+  },
+
   created() {
-    this.fetchTodoDate();
+    if (this.userId) {
+      this.fetchTodoData();
+    }
   },
 };
 </script>

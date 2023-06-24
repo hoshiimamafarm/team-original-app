@@ -1,33 +1,25 @@
 <template>
   <h1>自己PR投稿</h1>
-  <div>
-    <div>
-      <textarea v-model="titleText" placeholder="タイトル" />
-    </div>
-    <div>
-      <textarea v-model="prText" placeholder="自己PRの内容" />
-    </div>
+  <div v-if="this.userId === ''">ログインしてください</div>
+  <div v-else>
+    <textarea v-model="titleText" placeholder="タイトル" />
+    <textarea v-model="prText" placeholder="自己PRの内容" />
     <div v-if="errors">
       <div v-for="error in errors" v-bind:key="error">{{ error }}</div>
     </div>
-    <div>
-      <button v-on:click="postSelfPr">投稿</button>
-    </div>
-  </div>
-  <ul v-for="(selfPr, index) in selfPrs" v-bind:key="index">
-    <li>
-      <div>
-        {{ selfPr.title }}
-      </div>
-      <div>
-        {{ selfPr.selfPr }}
-      </div>
-      <div class="deleteButton">
+    <button v-on:click="postSelfPr">投稿</button>
+    <ul v-for="(selfPr, index) in selfPrs" v-bind:key="index">
+      <li>
+        <div>
+          {{ selfPr.title }}
+        </div>
+        <div>
+          {{ selfPr.selfPr }}
+        </div>
         <button v-on:click="deleteSelfPr(index)">削除</button>
-      </div>
-    </li>
-  </ul>
-  <div></div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -38,6 +30,7 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  getAuth,
 } from "../firebase.js";
 
 export default {
@@ -47,16 +40,14 @@ export default {
       prText: "",
       selfPrs: [],
       errors: [],
+      userId: "",
     };
-  },
-  created() {
-    this.fetchSelfprData();
   },
 
   methods: {
     async fetchSelfprData() {
-      const querySnapshot = await getDocs(collection(db, "selfPrs"));
       this.selfPrs = [];
+      const querySnapshot = await getDocs(collection(db, "selfPrs"));
       querySnapshot.forEach((doc) => {
         this.selfPrs.push({
           title: doc.data().title,
@@ -66,7 +57,7 @@ export default {
       });
     },
 
-    async postSelfPr() {
+    postSelfPr() {
       if (!this.prText && !this.titleText) {
         this.errors.push("タイトルと内容を入れてください");
       } else if (!this.prText) {
@@ -74,20 +65,36 @@ export default {
       } else if (!this.titleText) {
         this.errors.push("タイトルを入れてください");
       } else {
-        await addDoc(collection(db, "selfPrs"), {
+        addDoc(collection(db, "selfPrs"), {
           title: this.titleText,
           selfPr: this.prText,
+          userId: this.userId,
         });
-        this.fetchSelfprData();
 
-        (this.titleText = ""), (this.prText = "");
+        this.titleText = "";
+        this.prText = "";
         this.errors.splice(0);
+        this.fetchSelfprData();
       }
     },
+
     async deleteSelfPr(index) {
       await deleteDoc(doc(db, "selfPrs", this.selfPrs[index].id));
-      this.selfPrs.splice(index, 1);
+      this.fetchSelfprData();
     },
+
+    getUserId() {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user !== null) {
+        this.userId = user.uid;
+      }
+    },
+  },
+
+  created() {
+    this.fetchSelfprData();
+    this.getUserId();
   },
 };
 </script>
