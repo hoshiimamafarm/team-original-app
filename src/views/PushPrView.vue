@@ -31,6 +31,7 @@ import {
   deleteDoc,
   doc,
   getAuth,
+  onAuthStateChanged,
 } from "../firebase.js";
 
 export default {
@@ -83,18 +84,23 @@ export default {
       this.fetchSelfprData();
     },
 
-    getUserId() {
+    onAuthChange() {
       const auth = getAuth();
-      const user = auth.currentUser;
-      if (user !== null) {
+      onAuthStateChanged(auth, (user) => {
         this.userId = user.uid;
-      }
+      });
     },
+  },
+
+  mounted() {
+    window.onload = () => {
+      this.onAuthChange();
+    };
   },
 
   created() {
     this.fetchSelfprData();
-    this.getUserId();
+    this.onAuthChange();
   },
 };
 </script>

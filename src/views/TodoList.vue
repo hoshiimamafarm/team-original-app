@@ -37,6 +37,7 @@ import {
   getDocs,
   onSnapshot,
   getAuth,
+  onAuthStateChanged,
 } from "../firebase";
 
 export default {
@@ -100,12 +101,11 @@ export default {
       return y + "-" + m + "-" + d;
     },
 
-    getUserId() {
+    onAuthChange() {
       const auth = getAuth();
-      const user = auth.currentUser;
-      if (user !== null) {
+      onAuthStateChanged(auth, (user) => {
         this.userId = user.uid;
-      }
+      });
     },
   },
 
@@ -121,9 +121,15 @@ export default {
     },
   },
 
+  mounted() {
+    window.onload = () => {
+      this.onAuthChange();
+    };
+  },
+
   created() {
     this.fetchTodos();
-    this.getUserId();
+    this.onAuthChange();
   },
 };
 </script>
