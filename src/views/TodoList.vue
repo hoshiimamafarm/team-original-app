@@ -10,17 +10,20 @@
       cansel-text="キャンセル"
       format="yyyy年MM月dd日"
     />
-    <input v-model="todoText" placeholder="ToDoを入力" />
-    <button v-on:click="addTodo">追加</button>
+    <div class="container">
+      <input v-model="todoText" placeholder="ToDoを入力" />
+      <button v-on:click="addTodo">追加</button>
 
-    <ul>
-      <li v-for="(todo, index) in selectedDateTodos" v-bind:key="index">
-        <input type="checkbox" v-model="todo.completed" />
-        <label v-bind:class="{ completed: todo.completed }"
-          >{{ todo.todo }} {{ formatDate(todo.date) }}</label
-        >
-      </li>
-    </ul>
+      <ul>
+        <li v-for="(todo, index) in selectedDateTodos" v-bind:key="index">
+          <input type="checkbox" v-model="todo.completed" />
+          <label v-bind:class="{ completed: todo.completed }"
+            >{{ todo.todo }} {{ formatDate(todo.date).toDate() }}</label
+          >
+        </li>
+      </ul>
+    </div>
+
     <button v-on:click="deleteCompletedTodos">完了済みのToDoを削除</button>
   </div>
 </template>
@@ -29,15 +32,14 @@
 import VueDatePicker from "@vuepic/vue-datepicker";
 import "@vuepic/vue-datepicker/dist/main.css";
 import {
-  db,
   collection,
   addDoc,
   deleteDoc,
   doc,
   getDocs,
   onSnapshot,
-  getAuth,
-} from "../firebase";
+} from "firebase/firestore";
+import { db, getAuth } from "../firebase";
 
 export default {
   components: {
@@ -62,7 +64,7 @@ export default {
           userId: this.userId,
           completed: false,
         });
-        this.selectedDate = "";
+        //this.selectedDate = "";
         this.todoText = "";
       }
     },
@@ -81,14 +83,14 @@ export default {
       this.todos = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         todo: doc.data().todo,
-        date: doc.data().date,
+        date: doc.data().date.toDate(),
       }));
 
       onSnapshot(collection(db, "todos"), (snapshot) => {
         this.todos = snapshot.docs.map((doc) => ({
           id: doc.id,
           todo: doc.data().todo,
-          date: doc.data().date,
+          date: doc.data().date.toDate(),
         }));
       });
     },
