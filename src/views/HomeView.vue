@@ -17,34 +17,19 @@
     <ul>
       <div class="c2">
         <div class="co">
-          <img
-            src="https://cdn.discordapp.com/attachments/1107170796234866768/1122648315138429119/25244437_s.jpg"
-            width="420"
-            height="280"
-            alt=""
-          />
+          <img src="../images/home1.jpg" width="420" height="280" alt="" />
         </div>
         <div class="co">ToDoリストで予定を確認できる</div>
       </div>
       <div class="c3">
         <div class="co">みんなとESを共有できる</div>
         <div class="co">
-          <img
-            src="https://cdn.discordapp.com/attachments/1107170796234866768/1122648314354090054/24766690_s.jpg"
-            width="420"
-            height="280"
-            alt=""
-          />
+          <img src="../images/home2.jpg" width="420" height="280" alt="" />
         </div>
       </div>
       <div class="c4">
         <div class="co">
-          <img
-            src="https://cdn.discordapp.com/attachments/1107170796234866768/1122648314756730910/25427993_s.jpg"
-            width="420"
-            height="280"
-            alt=""
-          />
+          <img src="../images/home3.jpg" width="420" height="280" alt="" />
         </div>
         <div class="co">カレンダーで予定を一目で確認できる</div>
       </div>
@@ -81,7 +66,7 @@ export default {
   padding-top: 20%;
   padding-left: 3%;
   padding-bottom: 9%;
-  background-image: url(https://cdn.discordapp.com/attachments/1107170796234866768/1122648315461386312/26392205_m.jpg);
+  background-image: url(../images/shukatsu.jpg);
   background-size: auto;
   background-position: center;
   background-attachment: fixed;
