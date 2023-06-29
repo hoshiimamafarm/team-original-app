@@ -10,7 +10,6 @@
           v-bind:key="index"
           class="loolprone"
         >
-          <!-- <li> -->
           <div>
             {{ selfPr.title }}
           </div>
@@ -18,7 +17,6 @@
             {{ selfPr.selfPr }}
           </div>
           <button v-on:click="deleteSelfPr(index)">削除</button>
-          <!-- </li> -->
         </div>
       </div>
     </div>
