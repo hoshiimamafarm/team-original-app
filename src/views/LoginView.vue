@@ -5,15 +5,17 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
     rel="stylesheet"
   />
-  <div class="main">
-    <h3>ログイン・新規登録</h3>
-    <button class="loginButton" v-if="this.userId === ''" @click="signIn">
-      <img src="../images/google.png" alt="" />
-      Googleアカウントでログイン
-    </button>
-    <router-link loginButton to="/mypage" v-else
-      >さあ、JobHuntをはじめよう!</router-link
-    >
+  <div class="loginContainer">
+    <div class="main">
+      <h3>ログイン・新規登録</h3>
+      <button class="loginButton" v-if="this.userId === ''" @click="signIn">
+        <img src="../images/google.png" alt="" />
+        Googleアカウントでログイン
+      </button>
+      <router-link loginButton to="/mypage" v-else
+        >さあ、JobHuntをはじめよう!</router-link
+      >
+    </div>
   </div>
 </template>
 <script>
@@ -76,9 +78,14 @@ export default {
 </script>
 
 <style scoped>
+.loginContainer {
+  background-image: url(../images/login.jpg);
+  min-height: 90vh;
+  padding-top: 100px;
+}
+
 body {
   font-family: "Inter", sans-serif;
-  background-image: url(../images/login.jpg);
 }
 
 .main {
