@@ -12,30 +12,28 @@
       ><a class="login"> ログイン・新規登録 </a></router-link
     >
   </div>
-  <div class="c1">
-    <h2>JobHuntでできること</h2>
-  </div>
-  <div class="right">
-    <ul>
-      <div class="c2">
-        <div class="co">
-          <img src="../images/home1.jpg" width="420" height="280" alt="" />
-        </div>
-        <div class="co">ToDoリストで予定を確認できる</div>
+  <div class="mainArea">
+    <div class="c1">
+      <h2>JobHuntでできること</h2>
+    </div>
+    <div class="c2">
+      <div class="co">
+        <img src="../images/home1.jpg" width="420" height="280" alt="" />
       </div>
-      <div class="c3">
-        <div class="co">みんなとESを共有できる</div>
-        <div class="co">
-          <img src="../images/home2.jpg" width="420" height="280" alt="" />
-        </div>
+      <div class="co">ToDoリストで予定を確認できる</div>
+    </div>
+    <div class="c3">
+      <div class="co">みんなとESを共有できる</div>
+      <div class="co">
+        <img src="../images/home2.jpg" width="420" height="280" alt="" />
       </div>
-      <div class="c4">
-        <div class="co">
-          <img src="../images/home3.jpg" width="420" height="280" alt="" />
-        </div>
-        <div class="co">カレンダーで予定を一目で確認できる</div>
+    </div>
+    <div class="c4">
+      <div class="co">
+        <img src="../images/home3.jpg" width="420" height="280" alt="" />
       </div>
-    </ul>
+      <div class="co">カレンダーで予定を一目で確認できる</div>
+    </div>
   </div>
   <a class="login2">JobHuntをはじめる</a>
 </template>
@@ -49,9 +47,9 @@ export default {
         const elm = document.querySelector(".c" + String(i));
         const scroll = window.scrollY;
         if (scroll > scrollSize[i - 1]) {
-          elm.style.opacity = "1";
+          elm.style.opacity = 1;
         } else {
-          elm.style.opacity = "0";
+          elm.style.opacity = 0;
         }
       }
     });
@@ -59,7 +57,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.mainArea {
+  width: 60%;
+  margin: 50px auto;
+}
 .tatle {
   font-size: 40px;
   margin-top: 3%;

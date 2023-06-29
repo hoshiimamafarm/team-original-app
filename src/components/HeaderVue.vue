@@ -18,7 +18,7 @@
     </div>
   </Header>
 </template>
-<style>
+<style scoped>
 body {
   font-family: "Inter", sans-serif;
   background-color: gray;

@@ -75,7 +75,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 body {
   font-family: "Inter", sans-serif;
   background-image: url(../images/login.jpg);

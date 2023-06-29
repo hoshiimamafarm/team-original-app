@@ -20,12 +20,8 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .header {
-  z-index: 2;
   margin-top: 0;
-}
-.router {
-  z-index: 1;
 }
 </style>
