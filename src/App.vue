@@ -1,6 +1,10 @@
 <template>
-  <HeaderVue />
-  <router-view />
+  <div class="header">
+    <HeaderVue />
+  </div>
+  <div class="router">
+    <router-view />
+  </div>
   <FooterVue />
 </template>
 
@@ -16,3 +20,12 @@ export default {
   },
 };
 </script>
+<style>
+.header {
+  z-index: 2;
+  margin-top: 0;
+}
+.router {
+  z-index: 1;
+}
+</style>
