@@ -7,8 +7,8 @@
   />
   <div class="main">
     <h3>ログイン・新規登録</h3>
-    <button class="loginButton" v-if="!userName" @click="signIn">
-      <img src="../assets/google.png" alt="" />
+    <button class="loginButton" v-if="this.userId === ''" @click="signIn">
+      <img src="../images/google.png" alt="" />
       Googleアカウントでログイン
     </button>
     <router-link loginButton to="/mypage" v-else
@@ -30,6 +30,7 @@ export default {
   data() {
     return {
       userName: "",
+      userId: "",
     };
   },
 
@@ -51,9 +52,15 @@ export default {
     onAuthChange() {
       const auth = getAuth();
       onAuthStateChanged(auth, (user) => {
-        console.log(user);
+        this.userId = user.uid;
       });
     },
+  },
+
+  mounted() {
+    window.onload = () => {
+      this.onAuthChange();
+    };
   },
 
   created() {
@@ -71,7 +78,7 @@ export default {
 <style>
 body {
   font-family: "Inter", sans-serif;
-  background-image: url(../assets/login.jpg);
+  background-image: url(../images/login.jpg);
 }
 
 .main {

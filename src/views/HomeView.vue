@@ -50,10 +50,8 @@ export default {
         const scroll = window.scrollY;
         if (scroll > scrollSize[i - 1]) {
           elm.style.opacity = "1";
-          // console.log(scroll);
         } else {
           elm.style.opacity = "0";
-          // console.log(scroll);
         }
       }
     });
@@ -108,7 +106,7 @@ h2 {
 
 body {
   font-family: "Inter", sans-serif;
-  background-image: url(../assets/white.png);
+  background-image: url(../images/white.png);
   left: 0;
   right: 0;
 }

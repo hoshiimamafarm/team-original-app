@@ -73,7 +73,6 @@ export default {
       if (!auth.currentUser) {
         console.log("ログインしてください！");
       } else {
-        console.log("実行");
         this.userName = auth.currentUser?.displayName;
         this.onAuthChange();
       }

@@ -41,7 +41,7 @@
         <button v-on:click="postSelfPr">投稿</button>
       </div>
       <div class="img">
-        <img src="../assets/22911683.jpg" />
+        <img src="../images/22911683.jpg" />
       </div>
     </div>
   </div>
