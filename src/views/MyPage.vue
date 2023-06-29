@@ -2,7 +2,7 @@
   <div>
     <div>{{ userName }}</div>
     <img v-bind:src="userPhoto" />
-    <button v-if="!userName" @click="signIn">Googleでログイン</button>
+    <button v-if="!userId" @click="signIn">Googleでログイン</button>
     <button v-else @click="signOut">logout</button>
   </div>
   <Calendar :userId="this.userId" />
@@ -50,8 +50,8 @@ export default {
       signInWithPopup(auth, provider)
         .then((result) => {
           const user = result.user;
-          this.userphoto = user.photoURL;
-          this.username = user.displayName;
+          this.userPhoto = user.photoURL;
+          this.userName = user.displayName;
           this.userId = user.uid;
         })
         .catch((error) => {
@@ -64,18 +64,29 @@ export default {
       onAuthStateChanged(auth, (user) => {
         this.userName = user.displayName;
         this.userPhoto = user.photoURL;
+        this.userId = user.uid;
       });
+    },
+
+    checkLogin() {
+      const auth = getAuth();
+      if (!auth.currentUser) {
+        console.log("ログインしてください！");
+      } else {
+        this.userName = auth.currentUser?.displayName;
+        this.onAuthChange();
+      }
     },
   },
 
-  created() {
-    const auth = getAuth();
-    if (!auth.currentUser) {
-      console.log("ログインしてください！");
-    } else {
-      this.userName = auth.currentUser?.displayName;
+  mounted() {
+    window.onload = () => {
       this.onAuthChange();
-    }
+    };
+  },
+
+  created() {
+    this.checkLogin();
   },
 };
 </script>

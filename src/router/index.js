@@ -3,6 +3,7 @@ import HomeView from "../views/HomeView.vue";
 import PushPrView from "../views/PushPrView.vue";
 import MyPage from "../views/MyPage.vue";
 import TodoList from "../views/TodoList.vue";
+import LoginView from "../views/LoginView";
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/todolist",
     name: "todolist",
     component: TodoList,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: LoginView,
   },
 ];
 
