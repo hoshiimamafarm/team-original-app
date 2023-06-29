@@ -48,6 +48,8 @@ export default {
         const scroll = window.scrollY;
         if (scroll > scrollSize[i - 1]) {
           elm.style.opacity = 1;
+        } else if (elm !== null) {
+          elm.style.opacity = 1;
         } else {
           elm.style.opacity = 0;
         }
