@@ -8,7 +8,9 @@
     就活の自己管理なら <br />
     JobHunt
     <div class="bank"></div>
-    <a class="login"> ログイン・新規登録 </a>
+    <router-link to="/Login"
+      ><a class="login"> ログイン・新規登録 </a></router-link
+    >
   </div>
   <div class="c1">
     <h2>JobHuntでできること</h2>
@@ -106,7 +108,7 @@ h2 {
 
 body {
   font-family: "Inter", sans-serif;
-  background-color: rgb(253, 253, 253);
+  background-image: url(../assets/white.png);
   left: 0;
   right: 0;
 }
