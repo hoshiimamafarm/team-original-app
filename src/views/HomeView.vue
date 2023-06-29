@@ -49,7 +49,7 @@ export default {
         if (scroll > scrollSize[i - 1]) {
           elm.style.opacity = 1;
         } else if (elm !== null) {
-          elm.style.opacity = 1;
+          elm.style.opacity = 0;
         } else {
           elm.style.opacity = 0;
         }
