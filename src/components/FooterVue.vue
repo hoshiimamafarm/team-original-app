@@ -9,7 +9,6 @@
 
 <style scoped>
 footer {
-  margin-top: 50px;
   background-color: rgb(125, 127, 128);
   font-family: "Inter", sans-serif;
   height: 50px;
