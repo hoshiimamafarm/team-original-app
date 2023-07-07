@@ -1,10 +1,6 @@
 <template>
-  <div class="header">
-    <HeaderVue />
-  </div>
-  <div class="router">
-    <router-view />
-  </div>
+  <HeaderVue />
+  <router-view />
   <FooterVue />
 </template>
 
@@ -20,8 +16,3 @@ export default {
   },
 };
 </script>
-<style scoped>
-.header {
-  margin-top: 0;
-}
-</style>

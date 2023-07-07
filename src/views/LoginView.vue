@@ -1,21 +1,20 @@
 <template>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap"
-    rel="stylesheet"
-  />
-  <div class="main">
-    <h3>ログイン・新規登録</h3>
-    <button class="loginButton" v-if="this.userId === ''" @click="signIn">
-      <img src="../images/google.png" alt="" />
-      Googleアカウントでログイン
-    </button>
-    <router-link loginButton to="/mypage" v-else
-      >さあ、JobHuntをはじめよう!</router-link
-    >
+  <div class="loginContainer">
+    <div class="loginContent">
+      <h3>ログイン・新規登録</h3>
+      <div class="loginArea">
+        <button class="loginButton" v-if="this.userId === ''" @click="signIn">
+          <img src="../images/google.png" alt="" />
+          Googleでログイン
+        </button>
+        <router-link loginButton to="/mypage" class="loginLink" v-else
+          >さあ、JobHuntをはじめよう!</router-link
+        >
+      </div>
+    </div>
   </div>
 </template>
+
 <script>
 import {
   getAuth,
@@ -76,33 +75,65 @@ export default {
 </script>
 
 <style scoped>
-body {
-  font-family: "Inter", sans-serif;
+.loginContainer {
   background-image: url(../images/login.jpg);
-}
-
-.main {
-  background-color: rgb(241, 242, 245);
-  margin: 15% 30% 5% 30%;
-  border: solid 2px;
+  height: 90vh;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.main h3 {
+.loginContent {
+  background-color: #fff;
+  width: 30%;
+  border: solid 2px;
+}
+
+.loginContent h3 {
   border-bottom: solid 2px;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginArea {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginLink {
+  color: black;
+  font-size: large;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.loginLink:hover {
+  cursor: pointer;
+  color: rgb(186, 223, 255);
 }
 
 .loginButton {
   display: flex;
   align-items: center;
+  justify-content: center;
+  width: 60%;
+  height: 5rem;
   border: solid 2px;
-  margin: 15%;
-  padding: 4%;
-  padding-right: 10%;
+}
+
+.loginButton:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 .loginButton img {
   width: 40px;
   height: 40px;
+  margin-right: 1rem;
 }
 </style>
