@@ -1,48 +1,55 @@
 <template>
-  <h1>みんなのES投稿</h1>
-  <div v-if="this.userId === ''">ログインしてください</div>
-  <div v-else class="pr">
-    <div class="loolprContainer">
-      <div class="lookpr">
-        <h2>新着投稿</h2>
-        <div
-          v-for="(selfPr, index) in selfPrs"
-          v-bind:key="index"
-          class="loolprone"
-        >
-          <div>
-            {{ selfPr.title }}
+  <h1 class="pushprTitle">みんなのES投稿</h1>
+  <div class="pushprContainer">
+    <div class="pushprContent">
+      <div v-if="this.userId === ''">ログインしてください</div>
+      <div v-else>
+        <div class="lookPrContainer">
+          <div class="lookpr">
+            <h2>新着投稿</h2>
+            <div
+              v-for="(selfPr, index) in selfPrs"
+              v-bind:key="index"
+              class="lookOnePr"
+            >
+              <div class="prTitle">
+                {{ selfPr.title }}
+              </div>
+              <div>
+                {{ selfPr.selfPr }}
+              </div>
+              <button v-on:click="deleteSelfPr(index)" class="deleteBtn">
+                削除
+              </button>
+            </div>
           </div>
-          <div>
-            {{ selfPr.selfPr }}
-          </div>
-          <button v-on:click="deleteSelfPr(index)">削除</button>
         </div>
       </div>
     </div>
+
     <div class="pushtextContainer">
       <div class="pushtext">
-        <h2>投稿フォーム</h2>
+        <h2 class="formTitle">投稿フォーム</h2>
         <div>
-          <textarea v-model="titleText" placeholder="タイトル"></textarea>
-          <div class="textarea-container">
-            <textarea
-              v-model="prText"
-              placeholder="わたしのES"
-              class="textarea bg-white"
-              :style="textareaStyle"
-              @input="handleInput"
-            ></textarea>
-          </div>
+          <input
+            v-model="titleText"
+            placeholder="タイトル"
+            class="textareaTitle"
+          />
+          <textarea
+            v-model="prText"
+            placeholder="わたしのES"
+            class="textarea bg-white"
+            :style="textareaStyle"
+            @input="handleInput"
+          />
         </div>
         <div v-if="errors">
           <div v-for="error in errors" v-bind:key="error">{{ error }}</div>
         </div>
-        <button v-on:click="postSelfPr">投稿</button>
+        <button v-on:click="postSelfPr" class="postBtn">投稿</button>
       </div>
-      <div class="img">
-        <img src="../images/22911683.jpg" />
-      </div>
+      <img src="../images/22911683.jpg" class="img" />
     </div>
   </div>
 </template>
@@ -148,65 +155,113 @@ export default {
 </script>
 
 <style scoped>
-html {
-  word-break: break-all;
+.pushprContainer {
+  display: flex;
+  justify-content: center;
 }
 
-h2 {
+.pushprTitle {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.pushprContent {
+  width: 65%;
+}
+
+.pushprContent h2 {
   text-align: center;
   text-decoration: underline;
 }
-.pr {
-  display: flex;
-  width: 100%;
-  justify-content: space-evenly;
+.lookPrContainer {
+  margin: 0 2.5rem;
 }
-.loolprContainer {
-  width: 200%;
-  padding-left: 5%;
-  padding-right: 5%;
-}
+
 .lookpr {
   width: 100%;
-  height: 700px;
-  padding: 30px 20px;
+  height: 70vh;
+  padding: 3rem 2rem;
   box-sizing: border-box;
   border: 1px solid #333;
   text-align: center;
   overflow: hidden scroll;
 }
-.loolprone {
-  padding-top: 2%;
-  padding-bottom: 2%;
+.prTitle {
+  font-size: larger;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 0.5rem;
 }
+.lookOnePr {
+  padding: 1rem 0;
+}
+.deleteBtn {
+  width: 30%;
+  height: 2.5rem;
+  margin-top: 1rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  padding: 0 2rem;
+}
+
+.deleteBtn:hover {
+  cursor: pointer;
+  background-color: #373737;
+  color: #ccc;
+}
+
 .pushtextContainer {
-  padding-right: 5%;
+  width: 50%;
 }
 .pushtext {
   width: 80%;
-  padding: 30px 20px;
-  box-sizing: border-box;
+  padding: 3rem 2rem;
   border: 1px solid #333;
-  text-align: -webkit-center;
-}
-.img img {
-  width: 100%;
-  height: 40%;
+  text-align: center;
 }
 
-.textarea-container {
-  width: 100%;
+.formTitle {
+  text-decoration: underline;
+  margin-bottom: 1rem;
 }
 
+.textareaTitle {
+  width: 80%;
+  height: 2rem;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 0.2rem 1rem;
+  margin: 1rem 0;
+  font-size: medium;
+}
 .textarea {
   width: 80%;
   min-height: 100px;
   border: 1px solid #d9d9d9;
   border-radius: 4px;
-  padding: 5px 12px;
-
-  &::placeholder {
-    color: #d9d9d9;
-  }
+  padding: 1rem;
+  word-break: break-all;
+  font-size: medium;
+}
+.textarea::placeholder {
+  color: #d9d9d9;
+}
+.img {
+  height: 50vh;
+}
+.postBtn {
+  width: 30%;
+  height: 2.5rem;
+  margin-top: 1rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  padding: 0 2rem;
+}
+.postBtn:hover {
+  cursor: pointer;
+  background-color: #373737;
+  color: #ccc;
 }
 </style>
