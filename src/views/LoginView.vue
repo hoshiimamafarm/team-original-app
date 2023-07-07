@@ -1,4 +1,5 @@
 <template>
+
   <div class="loginContainer">
     <div class="loginContent">
       <h3>ログイン・新規登録</h3>
@@ -82,6 +83,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+
 }
 
 .loginContent {
