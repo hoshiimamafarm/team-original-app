@@ -5,40 +5,38 @@
       <div v-if="this.userId === ''">ログインしてください</div>
       <div v-else>
         <div class="left-section">
-          <div class="top-section">
-            <div class="centered">
-              <Datepicker
-                v-model="selectedDate"
-                placeholder="クリックして日時を入力"
-                locale="jp"
-                select-text="選択する"
-                cansel-text="キャンセル"
-                format="yyyy年MM月dd日"
-                class="datepicker"
-              />
-              <input v-model="todoText" placeholder="ToDoを入力" />
-            </div>
-          </div>
-          <button v-on:click="addTodo">追加</button>
+          <Datepicker
+            v-model="selectedDate"
+            placeholder="クリックして日時を入力"
+            locale="jp"
+            select-text="選択する"
+            cansel-text="キャンセル"
+            format="yyyy年MM月dd日"
+            class="datepicker"
+          />
+          <input
+            v-model="todoText"
+            placeholder="ToDoを入力"
+            class="todo-input"
+          />
+          <button v-on:click="addTodo" class="todo-btn">追加</button>
         </div>
         <div class="right-section">
-          <div class="wrapper">
-            <div class="todo-section">
-              <ul>
-                <li v-for="(todo, index) in todos" v-bind:key="index">
-                  <input type="checkbox" v-model="todo.completed" />
-                  <label v-bind:class="{ completed: todo.completed }"
-                    >{{ todo.todo }} {{ formatDate(todo.date) }}</label
-                  >
-                </li>
-              </ul>
-            </div>
-            <div class="delete-section">
-              <button v-on:click="deleteCompletedTodos">
-                完了済みのToDoを削除
-              </button>
-            </div>
-          </div>
+          <ul>
+            <li
+              v-for="(todo, index) in todos"
+              v-bind:key="index"
+              class="todo-list"
+            >
+              <input type="checkbox" v-model="todo.completed" />
+              <label v-bind:class="{ completed: todo.completed }"
+                >{{ todo.todo }} {{ formatDate(todo.date) }}</label
+              >
+            </li>
+          </ul>
+          <button v-on:click="deleteCompletedTodos" class="delete-btn">
+            完了済みのToDoを削除
+          </button>
         </div>
       </div>
     </div>
@@ -170,9 +168,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .container {
-  background-image: url("../assets/todo.jpg");
+  background-image: url("../images/todo.jpg");
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -182,15 +181,10 @@ export default {
 }
 
 .background {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  width: 80%;
-  max-width: 600px;
-  padding: 20px;
-}
-
-.title {
-  margin: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  width: 50%;
+  padding: 2rem;
 }
 
 .left-section {
@@ -199,48 +193,67 @@ export default {
   justify-content: center;
 }
 
-.right-section {
-  margin-top: 20px;
-}
-
-.top-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.centered {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-}
-
 .datepicker {
-  width: 300px;
+  width: 40%;
 }
 
-.wrapper {
+.todo-input {
+  width: 40%;
+  height: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0 0.5rem;
+  font-size: medium;
+}
+
+.todo-btn {
+  width: 10%;
+  height: 2.5rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+}
+.todo-btn:hover {
+  cursor: pointer;
+  background-color: #373737;
+  color: #ccc;
+}
+
+.right-section {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
-.section-title {
-  margin-bottom: 0px;
+.right-section ul {
+  margin: 1rem 0;
 }
 
-.todo-section {
-  margin-bottom: 20px;
+.todo-list {
+  list-style: none;
+  margin: 0.5rem 0;
 }
 
-.delete-section {
-  display: flex;
-  justify-content: flex-end;
+input[type="checkbox"] {
+  margin-right: 0.5rem;
 }
 
 .completed {
   text-decoration: line-through;
+}
+
+.delete-btn {
+  width: 30%;
+  height: 2.5rem;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 0.4rem;
+  padding: 0 2rem;
+}
+
+.delete-btn:hover {
+  cursor: pointer;
+  background-color: #373737;
+  color: #ccc;
 }
 </style>
