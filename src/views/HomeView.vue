@@ -30,16 +30,17 @@
 <script>
 export default {
   mounted() {
-    var scrollSize = [150, 400, 600, 800];
+    let scrollSize = [150, 400, 600, 800];
     window.addEventListener("scroll", function () {
-      let elm = 0;
       for (let i = 1; i < 5; i++) {
-        elm = document.querySelector(".c" + String(i));
+        const elm = document.querySelector(".c" + String(i));
         const scroll = window.scrollY;
-        if (scroll > scrollSize[i - 1]) {
-          elm.style.opacity = 1;
-        } else if (elm) {
-          elm.style.opacity = 0;
+        if (elm !== null) {
+          if (scroll > scrollSize[i - 1]) {
+            elm.style.opacity = 1;
+          } else {
+            elm.style.opacity = 0;
+          }
         }
       }
     });
